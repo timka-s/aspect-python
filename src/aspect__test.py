@@ -1,6 +1,6 @@
 import pytest
 
-from .advice import CoroutineAdvice
+from .advice import CoroutineAdvice, CompositeAdvice
 from .aspect import Aspect
 
 
@@ -11,7 +11,7 @@ def instance():
 
     return Aspect.from_function_kwargs(
         some_method=some_function,
-        other_method=some_function
+        other_method=[some_function, some_function]
     )
 
 
@@ -19,4 +19,4 @@ def test_constructor_ok(instance):
     assert isinstance(instance, Aspect)
 
     for advice in instance.advice_map.values():
-        assert isinstance(advice, CoroutineAdvice)
+        assert isinstance(advice, (CoroutineAdvice, CompositeAdvice))
