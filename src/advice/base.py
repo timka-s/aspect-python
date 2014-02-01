@@ -4,6 +4,9 @@ from .__external__ import FunctionWrapper
 
 
 class Advice:
+    def get_using_problems(self, method):
+        return []
+
     def get_proxy(self, function):
         runner = self._get_runner(function)
 

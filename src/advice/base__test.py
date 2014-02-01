@@ -8,6 +8,10 @@ def instance():
     return Advice()
 
 
+def test_get_using_problems_ok(instance):
+    assert instance.get_using_problems(lambda x: x) == []
+
+
 def test_get_proxy_ok(instance):
     def _get_runtime(args, kwargs):
         pass

@@ -1,5 +1,7 @@
 import pytest
 
+from itertools import chain
+
 from .base import Advice
 from .composite_runtime import CompositeAdviceRuntime
 from .composite import CompositeAdvice
@@ -42,6 +44,20 @@ def test_from_advice_set_ok_two(instance):
     captured_advice_set = merge_instance._advice_set
 
     assert captured_advice_set == expected_advice_set
+
+
+def test_get_using_problems_ok(instance):
+    def function(self):
+        pass
+
+    expected_using_problems = tuple(chain.from_iterable(
+        advice.get_using_problems(function)
+        for advice in instance._advice_set
+    ))
+
+    captured_using_problems = instance.get_using_problems(function)
+
+    assert captured_using_problems == expected_using_problems
 
 
 def test_get_runtime_ok(instance):

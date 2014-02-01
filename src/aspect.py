@@ -16,8 +16,8 @@ class Aspect:
     def _make_advice(function_or_set):
         if isinstance(function_or_set, (list, tuple)):
             return CompositeAdvice.from_advice_set([
-                CoroutineAdvice(function)
+                CoroutineAdvice.from_function(function)
                 for function in function_or_set
             ])
 
-        return CoroutineAdvice(function_or_set)
+        return CoroutineAdvice.from_function(function_or_set)

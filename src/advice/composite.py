@@ -20,6 +20,12 @@ class CompositeAdvice(Advice):
 
         return cls(result_advice_set)
 
+    def get_using_problems(self, function):
+        return tuple(chain.from_iterable(
+            advice.get_using_problems(function)
+            for advice in self._advice_set
+        ))
+
     def _get_runtime(self, args, kwargs):
         return CompositeAdviceRuntime(tuple(
             advice._get_runtime(args, kwargs)
