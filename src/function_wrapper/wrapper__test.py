@@ -1,19 +1,15 @@
 from .wrapper import FunctionWrapper
 
 
-class HandlerFactory:
-    __init__ = before = after = throw = lambda *args: None
-
-
 def test_ok():
-    def method(
+    def function(
             arg, arg_with_default='arg_with_default', *,
             kw, kw_with_default='kw_with_default'):
         return arg, arg_with_default, kw, kw_with_default
 
-    instance = FunctionWrapper(method, HandlerFactory)
+    instance = FunctionWrapper(function, function)
 
-    expected = ('arg', 'arg_with_default', 'kw', 'kw_with_default')
-    result = instance(expected[0], kw=expected[2])
+    expected_result = ('arg', 'arg_with_default', 'kw', 'kw_with_default')
+    captured_result = instance(expected_result[0], kw=expected_result[2])
 
-    assert expected == result
+    assert captured_result == expected_result

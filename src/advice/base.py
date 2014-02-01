@@ -1,9 +1,11 @@
-from .__external__ import FunctionWrapper
+from .__external__ import FunctionWrapper, FunctionCaller
 
 
 class Advice:
     def get_proxy(self, function):
-        return FunctionWrapper(function, self._get_runtime)
+        runner = FunctionCaller(function, self._get_runtime)
+
+        return FunctionWrapper(function, runner)
 
     def _get_runtime(self, args, kwargs):
         raise NotImplementedError
