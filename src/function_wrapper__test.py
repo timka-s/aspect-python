@@ -1,4 +1,4 @@
-from .wrapper import FunctionWrapper
+from .function_wrapper import FunctionWrapper
 
 
 def test_ok():

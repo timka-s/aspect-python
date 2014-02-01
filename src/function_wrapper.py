@@ -1,6 +1,6 @@
 from functools import update_wrapper, WRAPPER_ASSIGNMENTS
 
-from .__external__ import Signature
+from .signature import Signature
 
 
 WRAPPER_ASSIGNMENTS = WRAPPER_ASSIGNMENTS + ('__defaults__', '__kwdefaults__')
