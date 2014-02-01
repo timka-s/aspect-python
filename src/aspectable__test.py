@@ -9,7 +9,11 @@ def instance():
     def method_advice(self, arg):
         yield
 
-    aspect = Aspect.from_function_kwargs(
+    aspect_one = Aspect.from_function_kwargs(
+        method=method_advice
+    )
+
+    aspect_two = Aspect.from_function_kwargs(
         method=method_advice
     )
 
@@ -17,7 +21,9 @@ def instance():
         def method(self, arg):
             pass
 
-    class SomeClassWithAspect(SomeClass, metaclass=Aspectable, aspect=aspect):
+    class SomeClassWithAspect(SomeClass, metaclass=Aspectable, aspect_set=[
+        aspect_one, aspect_two
+    ]):
         pass
 
     return SomeClassWithAspect
